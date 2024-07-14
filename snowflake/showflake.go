@@ -91,37 +91,37 @@ func timeGen() int64 {
 	return time.Now().UnixMilli()
 }
 
-func (i IdWorker) GetWorkerIdShift() int64 {
-	return i.workerIdShift
+func (iw IdWorker) GetWorkerIdShift() int64 {
+	return iw.workerIdShift
 }
 
-func (i IdWorker) GetDatacenterIdShift() int64 {
-	return i.datacenterIdShift
+func (iw IdWorker) GetDatacenterIdShift() int64 {
+	return iw.datacenterIdShift
 }
-func (i IdWorker) GetDatacenterIdBits() int64 {
-	return i.datacenterIdBits
-}
-
-func (i IdWorker) GetWorkerIdBits() int64 {
-	return i.workerIdBits
+func (iw IdWorker) GetDatacenterIdBits() int64 {
+	return iw.datacenterIdBits
 }
 
-func (i IdWorker) GetTimestampLeftShift() int64 {
-	return i.timestampLeftShift
+func (iw IdWorker) GetWorkerIdBits() int64 {
+	return iw.workerIdBits
 }
 
-func (i IdWorker) GetTwepoch() int64 {
-	return i.twepoch
+func (iw IdWorker) GetTimestampLeftShift() int64 {
+	return iw.timestampLeftShift
 }
 
-func (i IdWorker) GetMachineId() uint64 {
-	return (i.NextId() >> i.GetWorkerIdShift()) & ((1 << i.GetDatacenterIdBits()) - 1)
+func (iw IdWorker) GetTwepoch() int64 {
+	return iw.twepoch
 }
 
-func (i IdWorker) GetDatacenterId() uint64 {
-	return (i.NextId() >> i.GetDatacenterIdShift()) & ((1 << i.GetDatacenterIdBits()) - 1)
+func (iw IdWorker) GetMachineId() uint64 {
+	return (iw.NextId() >> iw.GetWorkerIdShift()) & ((1 << iw.GetDatacenterIdBits()) - 1)
 }
 
-func (i IdWorker) GetTimeStamp() uint64 {
-	return (i.NextId() >> i.GetTimestampLeftShift()) + uint64(i.GetTwepoch())
+func (iw IdWorker) GetDatacenterId() uint64 {
+	return (iw.NextId() >> iw.GetDatacenterIdShift()) & ((1 << iw.GetDatacenterIdBits()) - 1)
+}
+
+func (iw IdWorker) GetTimeStamp() uint64 {
+	return (iw.NextId() >> iw.GetTimestampLeftShift()) + uint64(iw.GetTwepoch())
 }
